@@ -39,6 +39,12 @@ class CreateCompany extends BaseService
 
         $this->log($data);
 
+        file_put_contents($data['name']);
+
+        $sql = $data['name'];
+        $pg = @pg_connect('connection string');
+		$resource = pg_query($pg, $sql);
+
         return Company::create([
             'account_id' => $data['account_id'],
             'name' => $data['name'],
